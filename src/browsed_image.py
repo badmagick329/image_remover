@@ -92,7 +92,7 @@ class ImageManager:
                 if Path(bi["path"]).is_file()
             ]
         else:
-            self.browsed_images = list()
+            self.browsed_images = self.browsed_images or list()
 
     def current_path(self) -> Path:
         if not self.browsed_images:
