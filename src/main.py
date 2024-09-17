@@ -41,21 +41,6 @@ def main():
 
     root = init_root(WINDOW_WIDTH, WINDOW_HEIGHT)
 
-    ###############
-    # Initial Image
-    ###############
-    pilimg = Image.open(image_manager.current_path_as_str())
-    if pilimg.mode != "RGB":
-        pilimg = pilimg.convert("RGB")
-    old_width, old_height = pilimg.width, pilimg.height
-    new_width, new_height = get_scaled_size(
-        old_width, old_height, IMAGE_CONTAINER_WIDTH, IMAGE_CONTAINER_HEIGHT
-    )
-    pilimg = pilimg.resize((new_width, new_height))
-    img = ImageTk.PhotoImage(pilimg)
-    label = tk.Label(root, image=img)  # type: ignore
-    label.pack()
-
     ########
     # Status
     ########
@@ -94,6 +79,21 @@ def main():
     ]
     for i, text_and_callback in enumerate(button_text_and_callbacks):
         add_button(button_group, text_and_callback[0], i, text_and_callback[1])
+
+    ###############
+    # Initial Image
+    ###############
+    pilimg = Image.open(image_manager.current_path_as_str())
+    if pilimg.mode != "RGB":
+        pilimg = pilimg.convert("RGB")
+    old_width, old_height = pilimg.width, pilimg.height
+    new_width, new_height = get_scaled_size(
+        old_width, old_height, IMAGE_CONTAINER_WIDTH, IMAGE_CONTAINER_HEIGHT
+    )
+    pilimg = pilimg.resize((new_width, new_height))
+    img = ImageTk.PhotoImage(pilimg)
+    label = tk.Label(root, image=img)  # type: ignore
+    label.pack()
 
     root.mainloop()
 
